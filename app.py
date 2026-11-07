@@ -1,4 +1,9 @@
+
 import streamlit as st
+
+from models.train_models import train_all_models
+from models.bayes_model import predict_message
+from models.ml_model import predict_ml_message
 
 st.set_page_config(
     page_title="Qorgau AI",
@@ -6,50 +11,85 @@ st.set_page_config(
     layout="centered"
 )
 
-st.title("🛡️ Qorgau AI")
+st.title("Qorgau AI")
 st.subheader("Интеллектуальная защита от мошеннических сообщений")
 
 st.write(
-    "Проверьте подозрительное сообщение "
-    "и узнайте, может ли оно быть мошенническим."
+    "Введите подозрительное сообщение. "
+    "Две модели машинного обучения проанализируют его."
 )
 
-st.divider()
+@st.cache_resource
+def load_models():
+    return train_all_models()
 
-message = st.text_area(
-    "Введите сообщение для проверки:",
-    placeholder="Например: Ваш аккаунт заблокирован. Подтвердите карту..."
-)
+try:
+    bayes_model, logistic_model, results = load_models()
 
-if st.button("Проверить сообщение"):
-    if message.strip():
-        text = message.lower()
+    st.success("Модели успешно загружены и обучены.")
 
-        fraud_words = [
-            "переведите деньги",
-            "подтвердите карту",
-            "код из sms",
-            "аккаунт заблокирован"
-        ]
+    st.divider()
 
-        spam_words = [
-            "выиграй приз",
-            "бесплатный подарок",
-            "скидка 90%"
-        ]
+    message = st.text_area(
+        "Введите сообщение:",
+        placeholder="Например: Ваш аккаунт заблокирован..."
+    )
 
-        if any(word in text for word in fraud_words):
-            st.error("⚠️ Обнаружены признаки мошенничества!")
+    if st.button("Проверить сообщение"):
+        if message.strip():
 
-        elif any(word in text for word in spam_words):
-            st.warning("📢 Обнаружены признаки спама!")
+            bayes_result = predict_message(
+                bayes_model, message
+            )
+
+            logistic_result = predict_ml_message(
+                logistic_model, message
+            )
+
+            st.subheader("Результаты анализа")
+
+            col1, col2 = st.columns(2)
+
+            with col1:
+                st.write("Naive Bayes")
+                st.write("Категория:", bayes_result["category"])
+                st.write(
+                    "Уверенность:",
+                    f'{bayes_result["confidence"] * 100:.1f}%'
+                )
+
+            with col2:
+                st.write("Logistic Regression")
+                st.write("Категория:", logistic_result["category"])
+                st.write(
+                    "Уверенность:",
+                    f'{logistic_result["confidence"] * 100:.1f}%'
+                )
+
+            if bayes_result["category"] == logistic_result["category"]:
+                st.info("Обе модели определили одинаковую категорию.")
+            else:
+                st.warning(
+                    "Модели не согласны. Рекомендуется "
+                    "дополнительно проверить сообщение."
+                )
 
         else:
-            st.success("✅ Подозрительные фразы не обнаружены.")
+            st.info("Сначала введите сообщение.")
 
-    else:
-        st.info("Сначала введите сообщение.")
+    st.divider()
 
-st.divider()
+    st.subheader("Качество моделей на тестовых данных")
 
-st.caption("Qorgau AI — ваш помощник в цифровой безопасности.")
+    for model_name, metrics in results.items():
+        st.write(model_name)
+        st.write(f'Accuracy: {metrics["accuracy"]:.2%}')
+        st.write(f'Macro F1: {metrics["f1"]:.2%}')
+
+except Exception as error:
+    st.error(f"Не удалось загрузить модели: {error}")
+
+st.caption(
+    "Qorgau AI — учебный прототип для анализа сообщений."
+)
+
