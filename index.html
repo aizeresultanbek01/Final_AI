@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#101827">
+  <title>Qorgau AI — Проверка сообщений</title>
+  <style>
+    :root{--bg:#0b1220;--panel:#111c2e;--panel2:#16243a;--text:#edf3fb;--muted:#9aabc2;--line:#263750;--accent:#65d6b3;--blue:#8ab4ff}
+    *{box-sizing:border-box} body{margin:0;background:radial-gradient(circle at 15% 0%,#1a3150 0,transparent 34%),var(--bg);color:var(--text);font:16px/1.5 Inter,system-ui,-apple-system,Segoe UI,Arial,sans-serif}
+    .wrap{max-width:980px;margin:auto;padding:28px 22px 56px}.top{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:54px}
+    .brand{display:flex;align-items:center;gap:12px;font-weight:750;letter-spacing:.2px}.logo{width:42px;height:42px;border-radius:14px;background:linear-gradient(135deg,#65d6b3,#75a9ff);display:grid;place-items:center;color:#071321;font-weight:900;font-size:20px}
+    .tag{font-size:12px;color:var(--accent);border:1px solid #286452;padding:6px 10px;border-radius:999px;background:#102b2a}
+    .hero{max-width:700px;margin-bottom:30px}.eyebrow{color:var(--accent);font-size:13px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase}
+    h1{font-size:clamp(34px,6vw,56px);line-height:1.08;letter-spacing:-1.8px;margin:12px 0 16px}.sub{color:var(--muted);font-size:17px;max-width:620px}
+    .card{background:linear-gradient(160deg,rgba(22,36,58,.98),rgba(15,26,43,.98));border:1px solid var(--line);border-radius:22px;padding:26px;box-shadow:0 24px 70px #0005}
+    label{display:block;font-weight:650;margin-bottom:10px}textarea{width:100%;min-height:150px;resize:vertical;background:#0b1525;color:var(--text);border:1px solid #31445f;border-radius:14px;padding:16px;font:inherit;outline:none}
+    textarea:focus{border-color:var(--accent);box-shadow:0 0 0 3px #65d6b31c}.actions{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-top:16px}
+    button{border:0;border-radius:12px;padding:13px 21px;background:var(--accent);color:#071a18;font-weight:800;font-size:15px;cursor:pointer}
+    button:hover{filter:brightness(1.06)}button:focus-visible{outline:3px solid white;outline-offset:3px}.hint{color:var(--muted);font-size:13px}
+    .result{display:none;margin-top:22px;padding:18px;border:1px solid var(--line);border-radius:15px;background:#0d1828}.result.show{display:block}
+    .result-head{display:flex;align-items:center;gap:10px;font-weight:800;font-size:18px}.dot{width:11px;height:11px;border-radius:50%;background:var(--blue)}.result[data-type="fraud"] .dot{background:#ff737d}.result[data-type="spam"] .dot{background:#f4c66a}.result[data-type="safe"] .dot{background:var(--accent)}
+    .reason{color:#c0cde0;margin:8px 0 0}.notice{margin-top:18px;padding:13px 15px;border-radius:12px;background:#17253a;color:#aebed3;font-size:13px}
+    .features{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:18px}.feature{border:1px solid var(--line);background:#101b2c;border-radius:16px;padding:17px}.feature strong{display:block;margin-bottom:5px}.feature span{color:var(--muted);font-size:13px}
+    footer{margin-top:34px;color:#8294ad;font-size:12px;text-align:center}
+    @media(max-width:650px){.top{margin-bottom:38px}.card{padding:18px}.features{grid-template-columns:1fr}.tag{display:none}}
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <header class="top">
+      <div class="brand"><div class="logo">Q</div><span>Qorgau AI</span></div>
+      <div class="tag">ПРОТОТИП · KZ / RU</div>
+    </header>
+    <section class="hero">
+      <div class="eyebrow">Цифровая безопасность</div>
+      <h1>Проверь сообщение,<br>прежде чем доверять ему.</h1>
+      <p class="sub">Вставьте SMS или текст сообщения — прототип покажет предварительную категорию и объяснит, на что стоит обратить внимание.</p>
+    </section>
+    <section class="card" aria-label="Проверка сообщения">
+      <label for="message">Текст сообщения</label>
+      <textarea id="message" placeholder="Например: Ваш аккаунт заблокирован. Срочно подтвердите карту по ссылке..."></textarea>
+      <div class="actions">
+        <button id="check">Проверить сообщение</button>
+        <span class="hint">Не вводите настоящие пароли, коды или данные карты.</span>
+      </div>
+      <div class="result" id="result" aria-live="polite">
+        <div class="result-head"><span class="dot"></span><span id="category"></span></div>
+        <p class="reason" id="reason"></p>
+      </div>
+      <div class="notice">Важно: это демонстрационная версия с простыми правилами по ключевым фразам. Она пока не подключена к обученным моделям Naive Bayes и Logistic Regression и не гарантирует точное распознавание мошенничества.</div>
+    </section>
+    <section class="features">
+      <div class="feature"><strong>Предварительная проверка</strong><span>Ищет известные подозрительные формулировки.</span></div>
+      <div class="feature"><strong>Понятное объяснение</strong><span>Показывает, какие слова повлияли на результат.</span></div>
+      <div class="feature"><strong>Казахский и русский</strong><span>Интерфейс и примеры рассчитаны на два языка.</span></div>
+    </section>
+    <footer>Qorgau AI · Учебный проект · Не является сервисом финансовой безопасности</footer>
+  </main>
+<script>
+const fraud = [
+  "переведите деньги","подтвердите карту","аккаунт заблокирован","ваш аккаунт заблокирован",
+  "срочно перейдите по ссылке","код из sms","код из смс","ваш счет заблокирован",
+  "картаңыз бұғатталды","ақша аударыңыз","картаңызды растаңыз","сілтемеге өтіңіз",
+  "шотыңыз бұғатталды","растау кодын жіберіңіз"
+];
+const spam = [
+  "выиграй приз","бесплатный подарок","скидка 90%","вы выиграли","акция только сегодня",
+  "ұтып алыңыз","тегін сыйлық","жеңілдік","ұтыс ойыны"
+];
+const result = document.getElementById("result");
+document.getElementById("check").addEventListener("click", () => {
+  const text = document.getElementById("message").value.trim().toLowerCase();
+  if (!text) {
+    result.dataset.type = "unknown";
+    document.getElementById("category").textContent = "Введите сообщение";
+    document.getElementById("reason").textContent = "Добавьте текст в поле выше, чтобы выполнить демонстрационную проверку.";
+    result.classList.add("show");
+    return;
+  }
+  const fraudHits = fraud.filter(word => text.includes(word));
+  const spamHits = spam.filter(word => text.includes(word));
+  let type, title, reason;
+  if (fraudHits.length) {
+    type = "fraud"; title = "Возможное мошенничество";
+    reason = "Найдены подозрительные фразы: " + fraudHits.join(", ") + ". Не переходите по сомнительным ссылкам и не сообщайте личные данные.";
+  } else if (spamHits.length) {
+    type = "spam"; title = "Возможный спам";
+    reason = "Найдены рекламные или навязчивые фразы: " + spamHits.join(", ") + ". Проверьте отправителя и содержание предложения.";
+  } else {
+    type = "safe"; title = "Подозрительные фразы не найдены";
+    reason = "Это не доказывает, что сообщение безопасно. Проверяйте адрес отправителя, ссылки и любые просьбы сообщить личные данные.";
+  }
+  result.dataset.type = type;
+  document.getElementById("category").textContent = title;
+  document.getElementById("reason").textContent = reason;
+  result.classList.add("show");
+});
+</script>
+</body>
+</html>
