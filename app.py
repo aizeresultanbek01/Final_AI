@@ -1,35 +1,55 @@
 import streamlit as st
-import pandas as pd
-from models.training import train_models
-from agent.message_agent import MessageAgent
 
-st.set_page_config(page_title="Qorgau AI", page_icon="🛡️", layout="centered")
-st.title("Qorgau AI")
-st.caption("Қазақша және орысша хабарламаларды алдын ала талдау прототипі")
+st.set_page_config(
+    page_title="Qorgau AI",
+    page_icon="🛡️",
+    layout="centered"
+)
 
-@st.cache_resource
-def get_agent():
-    bayes, logistic, metrics = train_models()
-    return MessageAgent(bayes, logistic), metrics
+st.title("🛡️ Qorgau AI")
+st.subheader("Интеллектуальная защита от мошеннических сообщений")
 
-try:
-    agent, metrics = get_agent()
-    message = st.text_area("Тексергіңіз келетін хабарламаны енгізіңіз:", height=140,
-                           placeholder="Мысалы: Сіздің картаңыз бұғатталды. Сілтемеге өтіңіз...")
-    if st.button("Хабарламаны тексеру", type="primary"):
-        if not message.strip():
-            st.warning("Алдымен хабарлама енгізіңіз.")
+st.write(
+    "Проверьте подозрительное сообщение "
+    "и узнайте, может ли оно быть мошенническим."
+)
+
+st.divider()
+
+message = st.text_area(
+    "Введите сообщение для проверки:",
+    placeholder="Например: Ваш аккаунт заблокирован. Подтвердите карту..."
+)
+
+if st.button("Проверить сообщение"):
+    if message.strip():
+        text = message.lower()
+
+        fraud_words = [
+            "переведите деньги",
+            "подтвердите карту",
+            "код из sms",
+            "аккаунт заблокирован"
+        ]
+
+        spam_words = [
+            "выиграй приз",
+            "бесплатный подарок",
+            "скидка 90%"
+        ]
+
+        if any(word in text for word in fraud_words):
+            st.error("⚠️ Обнаружены признаки мошенничества!")
+
+        elif any(word in text for word in spam_words):
+            st.warning("📢 Обнаружены признаки спама!")
+
         else:
-            result = agent.analyze(message)
-            st.subheader("Талдау нәтижесі")
-            st.write(f"**Болжамды санат:** {result['label']}")
-            st.write(f"**Модель сенімділігі:** {result['confidence']:.1%}")
-            st.caption("Бұл — оқу жобасының прототипі. Нәтижеге толық сенуге болмайды.")
-            st.write("**Күмәнді сөздер:**", ", ".join(result["suspicious_terms"]) or "Табылмады")
-            st.write("**Модельдер болжамы:**")
-            st.json(result["model_outputs"])
-    with st.expander("Модель метрикалары"):
-        st.json(metrics)
-except Exception as exc:
-    st.error(f"Жобаны іске қосу кезінде қате шықты: {exc}")
-    st.info("Терминалда: pip install -r requirements.txt командасын орындаңыз.")
+            st.success("✅ Подозрительные фразы не обнаружены.")
+
+    else:
+        st.info("Сначала введите сообщение.")
+
+st.divider()
+
+st.caption("Qorgau AI — ваш помощник в цифровой безопасности.")
