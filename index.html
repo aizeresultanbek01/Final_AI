@@ -1,235 +1,269 @@
 <!DOCTYPE html>
 <html lang="kk">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Final_AI | Phishing Detection Lab & Profile</title>
-    <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        darkBg: '#0b0f19',
-                        cardBg: '#111827',
-                        electricBlue: '#3b82f6',
-                        neonBlue: '#60a5fa',
-                        accentGlow: '#1d4ed8'
-                    }
-                }
-            }
-        }
-    </script>
-    <!-- FontAwesome Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        .glass-panel {
-            background: rgba(17, 24, 39, 0.7);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(59, 130, 246, 0.2);
-        }
-        .glow-btn {
-            box-shadow: 0 0 20px rgba(59, 130, 246, 0.4);
-            transition: all 0.3s ease;
-        }
-        .glow-btn:hover {
-            box-shadow: 0 0 30px rgba(96, 165, 250, 0.8);
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#080b16">
+  <title>Qorgau AI — Цифрлық қауіпсіздік</title>
+  <meta name="description" content="Qorgau AI — қазақша және орысша хабарламаларды алдын ала тексеруге арналған оқу жобасы.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root{--bg:#080b16;--panel:#101528;--panel2:#141a30;--line:rgba(160,174,255,.13);--muted:#929bb6;--text:#f4f6ff;--cyan:#48d9e8;--purple:#9b78ff;--pink:#d77bdf;--green:#53d6a0;--red:#ff7189;--yellow:#f4c76b;--shadow:0 24px 70px rgba(0,0,0,.35)}
+    *{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:100px}body{margin:0;background:radial-gradient(ellipse at 12% 0%,rgba(40,174,196,.13),transparent 34%),radial-gradient(ellipse at 90% 12%,rgba(130,76,210,.17),transparent 35%),var(--bg);color:var(--text);font-family:"DM Sans",sans-serif;min-height:100vh}
+    body:before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.19;background-image:linear-gradient(rgba(154,171,255,.08) 1px,transparent 1px),linear-gradient(90deg,rgba(154,171,255,.08) 1px,transparent 1px);background-size:48px 48px;mask-image:linear-gradient(to bottom,black,transparent 85%);z-index:-1}
+    a{color:inherit;text-decoration:none}button,textarea{font:inherit}.wrap{width:min(1160px,calc(100% - 40px));margin:auto}
+    .topbar{position:sticky;top:0;z-index:20;background:rgba(8,11,22,.78);backdrop-filter:blur(18px);border-bottom:1px solid var(--line)}
+    .nav{height:78px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+    .brand{display:flex;align-items:center;gap:12px;font-family:Manrope,sans-serif;font-weight:800;letter-spacing:-.5px;font-size:19px}
+    .logo{width:42px;height:42px;border-radius:14px;display:grid;place-items:center;background:linear-gradient(140deg,var(--cyan),#6477ff 55%,var(--purple));box-shadow:0 8px 28px rgba(91,119,255,.25);color:#08101b;font-size:21px}
+    .brand small{display:block;color:var(--muted);font:500 10px "DM Sans";letter-spacing:1.4px;margin-top:2px}
+    .navlinks{display:flex;align-items:center;gap:7px;padding:6px;border:1px solid var(--line);background:rgba(255,255,255,.035);border-radius:999px}
+    .navlinks a{font-size:13px;color:#b6bfd6;padding:10px 15px;border-radius:999px;transition:.2s}
+    .navlinks a:hover,.navlinks a.active{color:white;background:linear-gradient(100deg,rgba(63,201,225,.22),rgba(151,112,255,.25))}
+    .navright{display:flex;align-items:center;gap:10px}.lang{border:1px solid var(--line);background:#151a2d;color:#dce3f8;padding:9px 12px;border-radius:12px;cursor:pointer;font-weight:700;font-size:12px}
+    .status{display:flex;align-items:center;gap:7px;color:#9ce6c6;font-size:11px;padding:8px 11px;border-radius:999px;background:rgba(83,214,160,.08);border:1px solid rgba(83,214,160,.18)}.dot{width:6px;height:6px;background:var(--green);border-radius:50%;box-shadow:0 0 10px var(--green)}
+    .hero{padding:52px 0 24px;display:grid;grid-template-columns:1.55fr .85fr;gap:18px}
+    .glass{background:linear-gradient(145deg,rgba(20,27,49,.92),rgba(14,18,34,.9));border:1px solid var(--line);border-radius:25px;box-shadow:var(--shadow);position:relative;overflow:hidden}
+    .hero-main{padding:38px 40px;min-height:310px;display:flex;flex-direction:column;justify-content:space-between}
+    .hero-main:after{content:"";position:absolute;width:330px;height:330px;border-radius:50%;right:-100px;top:-130px;background:radial-gradient(circle,rgba(108,98,255,.25),transparent 68%);pointer-events:none}
+    .eyebrow{display:inline-flex;align-items:center;gap:8px;color:#8de7ef;text-transform:uppercase;letter-spacing:1.8px;font-size:10px;font-weight:800}
+    .eyebrow:before{content:"";width:7px;height:7px;border-radius:50%;background:var(--cyan);box-shadow:0 0 12px var(--cyan)}
+    h1,h2,h3,p{margin-top:0}h1{font:800 clamp(30px,4vw,47px)/1.12 Manrope,sans-serif;letter-spacing:-1.7px;max-width:720px;margin:17px 0 14px}
+    .gradient{background:linear-gradient(90deg,#f4f6ff 8%,#61dce8 52%,#b18cff 95%);-webkit-background-clip:text;background-clip:text;color:transparent}
+    .hero-copy{max-width:650px;color:#aab3ca;font-size:14px;line-height:1.8;margin-bottom:24px}
+    .actions{display:flex;gap:11px;flex-wrap:wrap}.btn{border:0;border-radius:13px;padding:13px 18px;cursor:pointer;font-size:13px;font-weight:800;display:inline-flex;align-items:center;justify-content:center;gap:9px;transition:transform .2s,filter .2s}
+    .btn:hover{transform:translateY(-2px);filter:brightness(1.1)}.primary{color:#07121b;background:linear-gradient(100deg,#52dbe5,#9a83ff);box-shadow:0 9px 26px rgba(95,157,255,.22)}.secondary{color:#dce4fa;background:rgba(255,255,255,.045);border:1px solid var(--line)}
+    .hero-side{padding:25px;display:flex;flex-direction:column;justify-content:space-between;min-height:310px;background:linear-gradient(145deg,rgba(26,30,57,.96),rgba(17,20,39,.95))}
+    .side-top{display:flex;justify-content:space-between;align-items:center}.shield{width:55px;height:55px;border-radius:18px;background:linear-gradient(145deg,rgba(72,217,232,.18),rgba(155,120,255,.2));border:1px solid rgba(118,178,255,.24);display:grid;place-items:center;font-size:25px}
+    .tag{font-size:10px;color:#b9c5e3;border:1px solid var(--line);padding:7px 9px;border-radius:9px;background:rgba(255,255,255,.035)}
+    .side-title{font:700 18px Manrope;margin:22px 0 8px}.side-text{font-size:12px;color:var(--muted);line-height:1.7;margin:0}
+    .side-foot{border-top:1px solid var(--line);padding-top:16px;display:flex;justify-content:space-between;gap:10px}.mini-stat strong{font:800 22px Manrope;display:block}.mini-stat span{font-size:10px;color:var(--muted)}
+    .section-head{display:flex;justify-content:space-between;align-items:end;gap:20px;margin:42px 0 17px}.section-head h2{font:800 23px Manrope;letter-spacing:-.6px;margin:0 0 5px}.section-head p{font-size:12px;color:var(--muted);margin:0}.section-kicker{font-size:10px;color:#7edee8;letter-spacing:1.5px;text-transform:uppercase;font-weight:800}
+    .feature-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.feature{padding:21px;border-radius:19px;background:rgba(17,23,42,.78);border:1px solid var(--line);transition:.2s}.feature:hover{transform:translateY(-3px);border-color:rgba(113,159,255,.35)}
+    .feature-icon{width:39px;height:39px;border-radius:12px;display:grid;place-items:center;background:rgba(91,180,230,.1);color:var(--cyan);font-size:17px;margin-bottom:15px}.feature h3{font:700 14px Manrope;margin:0 0 7px}.feature p{font-size:11px;color:var(--muted);line-height:1.7;margin:0}
+    .scanner{padding:27px;margin-top:40px}.scanner-top{display:flex;justify-content:space-between;align-items:start;gap:20px;margin-bottom:20px}.scanner-top h2{font:800 22px Manrope;margin:0 0 7px}.scanner-top p{font-size:12px;color:var(--muted);margin:0;line-height:1.6}.label{font-size:11px;color:#cbd5ee;font-weight:700;display:block;margin:18px 0 9px}
+    .input-wrap{position:relative}.message-input{width:100%;min-height:145px;resize:vertical;border-radius:16px;border:1px solid rgba(133,153,220,.2);background:rgba(5,9,20,.62);padding:17px 18px;color:#f3f5ff;outline:none;font-size:13px;line-height:1.7;transition:.2s}.message-input:focus{border-color:rgba(87,204,225,.65);box-shadow:0 0 0 3px rgba(72,217,232,.08)}.message-input::placeholder{color:#65708e}
+    .input-bottom{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:10px}.hint{font-size:10px;color:#77829f;line-height:1.5}.scan-btn{min-width:170px}
+    .examples{display:flex;gap:8px;flex-wrap:wrap;margin-top:15px}.example{border:1px solid var(--line);background:rgba(255,255,255,.035);color:#aebbd8;border-radius:999px;padding:8px 11px;font-size:10px;cursor:pointer}.example:hover{border-color:rgba(72,217,232,.45);color:#e8fbff}
+    .result{display:none;margin-top:20px;border-radius:17px;padding:20px;border:1px solid var(--line);background:rgba(255,255,255,.025)}.result.show{display:block;animation:appear .35s ease}@keyframes appear{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+    .result-head{display:flex;gap:13px;align-items:center}.result-icon{width:43px;height:43px;border-radius:14px;display:grid;place-items:center;font-size:20px;background:rgba(255,255,255,.06)}.result-title{font:800 16px Manrope;margin:0 0 4px}.result-sub{font-size:11px;color:var(--muted);margin:0;line-height:1.6}.result[data-level="high"]{border-color:rgba(255,113,137,.3)}.result[data-level="medium"]{border-color:rgba(244,199,107,.3)}.result[data-level="low"]{border-color:rgba(83,214,160,.25)}.result[data-level="unknown"]{border-color:rgba(160,174,255,.2)}
+    .reasons{margin:16px 0 0;padding:13px 15px;border-radius:12px;background:rgba(3,7,17,.38)}.reasons b{font-size:11px}.reasons ul{margin:8px 0 0;padding-left:17px;color:#aeb8d1;font-size:11px;line-height:1.8}.result-note{font-size:10px;color:#8994b0;line-height:1.6;margin:14px 0 0}
+    .below-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:15px;margin-top:17px}.subpanel{padding:22px}.subpanel h3{font:700 15px Manrope;margin:0 0 13px}.history-empty{color:#77829f;font-size:11px;padding:17px;border:1px dashed var(--line);border-radius:12px;text-align:center}.history-list{display:grid;gap:9px}.history-item{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 12px;background:rgba(255,255,255,.03);border-radius:11px}.history-item span{font-size:10px;color:#aeb8d1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.pill{font-size:9px;padding:5px 8px;border-radius:999px;white-space:nowrap}.pill.high{color:#ff9aac;background:rgba(255,113,137,.1)}.pill.medium{color:#f5d18b;background:rgba(244,199,107,.1)}.pill.low{color:#7ce0b7;background:rgba(83,214,160,.1)}
+    .tip-list{display:grid;gap:12px}.tip{display:flex;gap:11px;align-items:start}.tip-num{width:24px;height:24px;flex:0 0 24px;border-radius:8px;background:rgba(155,120,255,.13);color:#c2adff;display:grid;place-items:center;font-size:10px;font-weight:800}.tip p{font-size:11px;color:#aeb8d1;line-height:1.6;margin:1px 0 0}
+    .disclaimer{display:flex;gap:12px;align-items:start;margin-top:18px;padding:15px 17px;border-radius:14px;background:rgba(244,199,107,.055);border:1px solid rgba(244,199,107,.15);color:#d5c49d;font-size:10px;line-height:1.7}.disclaimer strong{color:#f4d58f}
+    footer{margin-top:55px;border-top:1px solid var(--line);padding:24px 0 32px;color:#74809d;font-size:10px}.footer-inner{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}.footer-brand{color:#dce4f8;font-weight:800;font-size:12px}
+    .toast{position:fixed;bottom:22px;left:50%;transform:translate(-50%,20px);opacity:0;pointer-events:none;background:#202943;border:1px solid var(--line);color:white;padding:11px 16px;border-radius:12px;font-size:11px;transition:.25s;z-index:50}.toast.show{opacity:1;transform:translate(-50%,0)}
+    @media(max-width:850px){.navlinks{display:none}.hero{grid-template-columns:1fr}.hero-side{min-height:230px}.hero-main{min-height:300px}.below-grid{grid-template-columns:1fr}}
+    @media(max-width:600px){.wrap{width:min(100% - 26px,1160px)}.nav{height:68px}.brand{font-size:16px}.logo{width:38px;height:38px}.status{display:none}.hero{padding-top:25px}.hero-main{padding:25px 22px;min-height:330px}.hero-side{padding:21px}.feature-grid{grid-template-columns:1fr}.feature{display:flex;gap:13px;align-items:start}.feature-icon{flex:0 0 39px;margin:0}.scanner{padding:20px 15px;margin-top:30px}.scanner-top{display:block}.scanner-top .tag{display:inline-block;margin-top:12px}.input-bottom{align-items:stretch;flex-direction:column}.scan-btn{width:100%}.section-head{margin-top:32px}.section-head h2{font-size:20px}.footer-inner{display:block}.footer-inner div+div{margin-top:9px}}
+    @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important;animation:none!important}}
+  </style>
 </head>
-<body class="bg-darkBg text-gray-100 font-sans min-h-screen flex flex-col">
-
-    <!-- Navbar -->
-    <nav class="glass-panel sticky top-0 z-50 border-b border-blue-900/40 px-6 py-4 flex justify-between items-center">
-        <div class="flex items-center space-x-3">
-            <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-blue-600 to-cyan-400 flex items-center justify-center shadow-lg shadow-blue-500/30">
-                <i class="fa-solid fa-shield-halved text-white text-xl"></i>
-            </div>
-            <span class="text-xl font-bold tracking-wider bg-gradient-to-r from-white via-blue-200 to-blue-400 bg-clip-text text-transparent">Final_AI Lab</span>
-        </div>
-        <div class="hidden md:flex items-center space-x-8 text-sm font-medium text-gray-300">
-            <a href="#dashboard" class="hover:text-neonBlue transition">Басты бет</a>
-            <a href="#scanner" class="hover:text-neonBlue transition">Тексеру зертханасы</a>
-            <a href="#profile" class="hover:text-neonBlue transition">Профиль</a>
-        </div>
-        <div class="flex items-center space-x-4">
-            <span class="px-3 py-1 text-xs rounded-full bg-blue-500/10 border border-blue-500/30 text-neonBlue">v2.4 Active</span>
-            <div class="w-9 h-9 rounded-full bg-gradient-to-r from-blue-500 to-indigo-600 flex items-center justify-center font-bold text-white shadow-md">СА</div>
-        </div>
+<body>
+<header class="topbar">
+  <div class="wrap nav">
+    <a class="brand" href="#home" aria-label="Qorgau AI">
+      <span class="logo">⌑</span><span>Qorgau AI<small>ЦИФРЛЫҚ ҚАУІПСІЗДІК</small></span>
+    </a>
+    <nav class="navlinks" aria-label="Негізгі навигация">
+      <a class="active" href="#home" data-i18n="navHome">Басты бет</a>
+      <a href="#scanner" data-i18n="navCheck">Тексеру</a>
+      <a href="#how" data-i18n="navHow">Қалай жұмыс істейді</a>
+      <a href="#tips" data-i18n="navTips">Қауіпсіздік кеңестері</a>
     </nav>
+    <div class="navright"><span class="status"><i class="dot"></i><span data-i18n="demoStatus">Демо-нұсқа</span></span><button class="lang" id="langBtn" type="button">RU</button></div>
+  </div>
+</header>
 
-    <!-- Main Container -->
-    <main class="max-w-7xl mx-auto px-4 sm:px-6 py-8 flex-grow space-y-10">
+<main class="wrap" id="home">
+  <section class="hero">
+    <div class="glass hero-main">
+      <div>
+        <span class="eyebrow" data-i18n="eyebrow">ХАБАРЛАМАЛАРДЫ ТЕКСЕРУ ҚҰРАЛЫ</span>
+        <h1 data-i18n-html="heroTitle">Күмәнді хабарламаға<br><span class="gradient">бірден сенбеңіз.</span></h1>
+        <p class="hero-copy" data-i18n="heroCopy">SMS немесе хабарлама мәтінін енгізіңіз. Qorgau AI күмәнді сөз тіркестерін анықтап, неліктен сақ болу керегін түсіндіреді.</p>
+      </div>
+      <div class="actions">
+        <a class="btn primary" href="#scanner"><span>⌕</span><span data-i18n="startBtn">Тексеруді бастау</span></a>
+        <a class="btn secondary" href="#how"><span>↗</span><span data-i18n="learnBtn">Жоба туралы</span></a>
+      </div>
+    </div>
+    <aside class="glass hero-side">
+      <div>
+        <div class="side-top"><div class="shield">⛨</div><span class="tag">KZ / RU · WEB</span></div>
+        <h2 class="side-title" data-i18n="sideTitle">Сандық кеңістіктегі сақтық</h2>
+        <p class="side-text" data-i18n="sideCopy">Хабарламаның мазмұнын алдын ала талдап, ықтимал қауіп белгілеріне назар аударуға көмектесетін оқу прототипі.</p>
+      </div>
+      <div class="side-foot">
+        <div class="mini-stat"><strong id="sessionCount">0</strong><span data-i18n="sessionChecks">Осы сессиядағы тексеру</span></div>
+        <div class="mini-stat"><strong>2</strong><span data-i18n="languages">Тіл</span></div>
+        <div class="mini-stat"><strong>24/7</strong><span data-i18n="access">Қолжетімділік</span></div>
+      </div>
+    </aside>
+  </section>
 
-        <!-- Hero & Dashboard Overview -->
-        <section id="dashboard" class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-            <!-- Left Info Card -->
-            <div class="lg:col-span-2 glass-panel rounded-2xl p-8 relative overflow-hidden flex flex-col justify-between">
-                <div class="absolute -right-10 -bottom-10 w-64 h-64 bg-blue-600/10 rounded-full blur-3xl pointer-events-none"></div>
-                <div>
-                    <span class="text-xs uppercase tracking-widest text-blue-400 font-semibold">Жасанды интеллект қауіпсіздігі</span>
-                    <h1 class="text-3xl sm:text-4xl font-extrabold mt-2 text-white leading-tight">AI Phishing Detection & Security Lab</h1>
-                    <p class="text-gray-400 mt-4 text-sm sm:text-base leading-relaxed">
-                        Бұл жүйе күдікті сілтемелер мен хабарламаларды машиналық оқыту және ықтималдық инфрақызыл талдау әдістері арқылы автоматты түрде анықтап, киберқауіптердің алдын алады.
-                    </p>
-                </div>
-                <div class="mt-8 flex flex-wrap gap-4">
-                    <a href="#scanner" class="px-6 py-3 bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-medium rounded-xl glow-btn flex items-center space-x-2">
-                        <i class="fa-solid fa-wand-magic-sparkles"></i>
-                        <span>Тексеруді бастау</span>
-                    </a>
-                    <a href="#profile" class="px-6 py-3 glass-panel hover:bg-blue-900/20 text-gray-200 font-medium rounded-xl transition border border-blue-500/30">
-                        Профильді көру
-                    </a>
-                </div>
-            </div>
+  <section id="how">
+    <div class="section-head"><div><span class="section-kicker" data-i18n="howKicker">МҮМКІНДІКТЕР</span><h2 data-i18n="howTitle">Қарапайым. Түсінікті. Пайдалы.</h2><p data-i18n="howSub">Qorgau AI қалай көмектеседі?</p></div></div>
+    <div class="feature-grid">
+      <article class="feature"><div class="feature-icon">⌕</div><div><h3 data-i18n="f1Title">Мәтінді талдау</h3><p data-i18n="f1Copy">Қауіпке тән сөздер мен қысым жасайтын тіркестерді іздейді.</p></div></article>
+      <article class="feature"><div class="feature-icon">◎</div><div><h3 data-i18n="f2Title">Нәтижені түсіндіру</h3><p data-i18n="f2Copy">Нәтижеге әсер еткен белгілерді көрсетіп, неліктен сақ болу керегін түсіндіреді.</p></div></article>
+      <article class="feature"><div class="feature-icon">◈</div><div><h3 data-i18n="f3Title">Екі тілге бейімделген</h3><p data-i18n="f3Copy">Қазақ және орыс тілдеріндегі кең таралған мысалдармен жұмыс істейді.</p></div></article>
+    </div>
+  </section>
 
-            <!-- Profile Quick Widget -->
-            <div id="profile" class="glass-panel rounded-2xl p-6 flex flex-col justify-between border border-blue-500/30">
-                <div class="flex items-center space-x-4">
-                    <div class="w-16 h-16 rounded-2xl bg-gradient-to-tr from-blue-600 to-cyan-500 p-0.5 shadow-lg shadow-blue-500/30">
-                        <div class="w-full h-full bg-gray-900 rounded-[14px] flex items-center justify-center text-2xl font-bold text-blue-400">СА</div>
-                    </div>
-                    <div>
-                        <h3 class="text-lg font-bold text-white">Сұлтанбек Айзере</h3>
-                        <p class="text-xs text-blue-400 font-medium">1-курс студенті | AI & Data Science</p>
-                    </div>
-                </div>
-                <div class="my-6 space-y-3">
-                    <div class="flex justify-between text-sm">
-                        <span class="text-gray-400">Жобалар статусы:</span>
-                        <span class="text-emerald-400 font-semibold"><i class="fa-solid fa-circle text-[8px] mr-1"></i> Белсенді</span>
-                    </div>
-                    <div class="flex justify-between text-sm">
-                        <span class="text-gray-400">Тексерілген сілтемелер:</span>
-                        <span class="text-white font-bold">1,248</span>
-                    </div>
-                    <div class="flex justify-between text-sm">
-                        <span class="text-gray-400">Дәлдік көрсеткіші:</span>
-                        <span class="text-blue-400 font-bold">98.4%</span>
-                    </div>
-                </div>
-                <div class="w-full bg-blue-950 rounded-full h-2 overflow-hidden border border-blue-800/40">
-                    <div class="bg-gradient-to-r from-blue-500 to-cyan-400 h-full rounded-full" style="width: 85%"></div>
-                </div>
-                <p class="text-[11px] text-gray-400 mt-2 text-right">Сессиялық прогресс: 85%</p>
-            </div>
-        </section>
+  <section class="glass scanner" id="scanner">
+    <div class="scanner-top"><div><span class="section-kicker" data-i18n="scanKicker">QORGAU AI · SCANNER</span><h2 data-i18n="scanTitle">Хабарламаны тексеру</h2><p data-i18n="scanSub">Күмәнді SMS немесе мәтінді төмендегі өріске енгізіңіз.</p></div><span class="tag" data-i18n="ruleTag">Ережелерге негізделген демо</span></div>
+    <label class="label" for="messageInput" data-i18n="inputLabel">Хабарлама мәтіні</label>
+    <div class="input-wrap"><textarea id="messageInput" class="message-input" maxlength="3000" placeholder="Мысалы: Сіздің картаңыз бұғатталды. Қолжетімділікті қалпына келтіру үшін SMS кодын жіберіңіз..." data-i18n-placeholder="placeholder"></textarea></div>
+    <div class="input-bottom"><span class="hint" data-i18n="privacyHint">Құпиясөз, SMS-код немесе банк картаңыздың деректерін енгізбеңіз.</span><button class="btn primary scan-btn" id="analyzeBtn" type="button"><span>⌕</span><span data-i18n="analyzeBtn">Хабарламаны тексеру</span></button></div>
+    <div class="examples"><button class="example" type="button" data-example="scam" data-i18n="exampleScam">Мысал: күмәнді хабарлама</button><button class="example" type="button" data-example="safe" data-i18n="exampleSafe">Мысал: бейтарап хабарлама</button><button class="example" type="button" data-example="spam" data-i18n="exampleSpam">Мысал: спам</button></div>
+    <div class="result" id="result" aria-live="polite" data-level="unknown">
+      <div class="result-head"><div class="result-icon" id="resultIcon">ⓘ</div><div><h3 class="result-title" id="resultTitle"></h3><p class="result-sub" id="resultDesc"></p></div></div>
+      <div class="reasons"><b data-i18n="reasonTitle">Назар аударылған белгілер</b><ul id="reasonList"></ul></div>
+      <p class="result-note" data-i18n="resultDisclaimer">Бұл — алдын ала автоматты бағалау. Нәтиже хабарламаның шын немесе жалған екенін дәлелдемейді.</p>
+    </div>
+  </section>
 
-        <!-- Phishing Detection Interactive Lab Section -->
-        <section id="scanner" class="glass-panel rounded-2xl p-6 sm:p-8 border border-blue-500/30">
-            <div class="max-w-2xl mx-auto text-center space-y-3">
-                <h2 class="text-2xl font-bold text-white">Сілтеме немесе хабарламаны тексеру</h2>
-                <p class="text-sm text-gray-400">Тексергіңіз келген күдікті URL мекенжайын немесе мәтінді төмендегі жолаққа енгізіңіз.</p>
-            </div>
+  <div class="below-grid">
+    <section class="glass subpanel">
+      <h3 data-i18n="historyTitle">Соңғы тексерулер</h3>
+      <div id="history" class="history-empty" data-i18n="historyEmpty">Әзірге тексерулер жоқ. Алғашқы хабарламаны тексеріп көріңіз.</div>
+    </section>
+    <section class="glass subpanel" id="tips">
+      <h3 data-i18n="tipsTitle">Өзіңізді қалай қорғауға болады?</h3>
+      <div class="tip-list">
+        <div class="tip"><span class="tip-num">01</span><p data-i18n="tip1">SMS арқылы келген бір реттік кодты ешкімге айтпаңыз.</p></div>
+        <div class="tip"><span class="tip-num">02</span><p data-i18n="tip2">Күмәнді сілтемелерді ашпай, ұйымның ресми қосымшасын өзіңіз ашыңыз.</p></div>
+        <div class="tip"><span class="tip-num">03</span><p data-i18n="tip3">Асықтыратын немесе қорқытатын хабарламаны қайта тексеріңіз.</p></div>
+      </div>
+    </section>
+  </div>
 
-            <div class="mt-8 max-w-3xl mx-auto space-y-4">
-                <div class="relative">
-                    <input type="text" id="targetInput" placeholder="Мысалы: http://secure-login-update-bank.com немесе күдікті хабарлама..." class="w-full bg-gray-900/80 border border-blue-500/40 rounded-xl px-5 py-4 text-white placeholder-gray-500 focus:outline-none focus:border-neonBlue focus:ring-2 focus:ring-blue-500/20 text-sm">
-                    <button onclick="analyzeTarget()" class="absolute right-2 top-2 bottom-2 px-6 bg-blue-600 hover:bg-blue-500 text-white font-medium rounded-lg transition shadow-md flex items-center space-x-2">
-                        <i class="fa-solid fa-magnifying-glass"></i>
-                        <span>Тексеру</span>
-                    </button>
-                </div>
+  <div class="disclaimer"><span>ⓘ</span><div><strong data-i18n="noticeTitle">Маңызды ескерту.</strong> <span data-i18n="noticeCopy">Qorgau AI — оқу мақсатындағы демонстрациялық прототип. Қазіргі веб-нұсқа қарапайым ережелер мен кілт сөздерге сүйенеді; ол оқытылған Naive Bayes немесе Logistic Regression моделіне қосылмаған және алаяқтықты дәл анықтауға кепілдік бермейді. Күмәнді жағдайда хабарламаны ресми арна арқылы тексеріңіз.</span></div></div>
+</main>
 
-                <!-- Result Box (Hidden by default) -->
-                <div id="resultBox" class="hidden mt-6 p-6 rounded-xl border transition-all duration-300">
-                    <div class="flex items-start space-x-4">
-                        <div id="resultIcon" class="text-2xl mt-1"></div>
-                        <div class="flex-grow">
-                            <h4 id="resultTitle" class="text-lg font-bold"></h4>
-                            <p id="resultDesc" class="text-sm mt-1 text-gray-300"></p>
-                            <div class="mt-4 grid grid-cols-2 sm:grid-cols-3 gap-4 text-xs bg-gray-950/50 p-3 rounded-lg border border-blue-900/30">
-                                <div>
-                                    <span class="text-gray-400 block">Қауіптілік деңгейі:</span>
-                                    <span id="riskLevel" class="font-bold text-sm"></span>
-                                </div>
-                                <div>
-                                    <span class="text-gray-400 block">Ықтималдық:</span>
-                                    <span id="probScore" class="font-bold text-sm text-blue-400"></span>
-                                }</div>
-                                <div>
-                                    <span class="text-gray-400 block">Тармақ протоколы:</span>
-                                    <span class="font-bold text-sm text-gray-200">HTTPS / Heuristic</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+<footer><div class="wrap footer-inner"><div><div class="footer-brand">Qorgau AI</div><div data-i18n="footerSub">Цифрлық қауіпсіздікке арналған оқу жобасы</div></div><div data-i18n="footerNote">Демонстрациялық нұсқа · KZ / RU · 2026</div></div></footer>
+<div class="toast" id="toast" role="status"></div>
 
-        <!-- Recent Activity Cards -->
-        <section class="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div class="glass-panel rounded-xl p-6 border border-blue-900/40 hover:border-blue-500/40 transition">
-                <div class="w-10 h-10 rounded-lg bg-blue-500/10 text-blue-400 flex items-center justify-center mb-4 text-lg">
-                    <i class="fa-solid fa-shield-virus"></i>
-                </div>
-                <h3 class="font-bold text-white text-base">URL Heuristic Engine</h3>
-                <p class="text-xs text-gray-400 mt-2 leading-relaxed">Домендерді фишингтік белгілері мен ұқсас символдарға (Typosquatting) қарай автоматты түрде сараптайды.</p>
-            </div>
-            <div class="glass-panel rounded-xl p-6 border border-blue-900/40 hover:border-blue-500/40 transition">
-                <div class="w-10 h-10 rounded-lg bg-cyan-500/10 text-cyan-400 flex items-center justify-center mb-4 text-lg">
-                    <i class="fa-solid fa-brain"></i>
-                </div>
-                <h3 class="font-bold text-white text-base">Machine Learning Model</h3>
-                <p class="text-xs text-gray-400 mt-2 leading-relaxed">Сұрақтар мен хабарламаларды семантикалық тұрғыдан жіктейтін озық алгоритмдер.</p>
-            </div>
-            <div class="glass-panel rounded-xl p-6 border border-blue-900/40 hover:border-blue-500/40 transition">
-                <div class="w-10 h-10 rounded-lg bg-indigo-500/10 text-indigo-400 flex items-center justify-center mb-4 text-lg">
-                    <i class="fa-solid fa-chart-line"></i>
-                </div>
-                <h3 class="font-bold text-white text-base">Real-time Analytics</h3>
-                <p class="text-xs text-gray-400 mt-2 leading-relaxed">Барлық тексерілген сұраулар мен қауіптердің статистикалық базасы мен есептері.</p>
-            </div>
-        </section>
+<script>
+const translations = {
+ kk:{
+  navHome:"Басты бет",navCheck:"Тексеру",navHow:"Қалай жұмыс істейді",navTips:"Қауіпсіздік кеңестері",demoStatus:"Демо-нұсқа",
+  eyebrow:"ХАБАРЛАМАЛАРДЫ ТЕКСЕРУ ҚҰРАЛЫ",heroTitle:'Күмәнді хабарламаға<br><span class="gradient">бірден сенбеңіз.</span>',heroCopy:"SMS немесе хабарлама мәтінін енгізіңіз. Qorgau AI күмәнді сөз тіркестерін анықтап, неліктен сақ болу керегін түсіндіреді.",startBtn:"Тексеруді бастау",learnBtn:"Жоба туралы",
+  sideTitle:"Сандық кеңістіктегі сақтық",sideCopy:"Хабарламаның мазмұнын алдын ала талдап, ықтимал қауіп белгілеріне назар аударуға көмектесетін оқу прототипі.",sessionChecks:"Осы сессиядағы тексеру",languages:"Тіл",access:"Қолжетімділік",
+  howKicker:"МҮМКІНДІКТЕР",howTitle:"Қарапайым. Түсінікті. Пайдалы.",howSub:"Qorgau AI қалай көмектеседі?",f1Title:"Мәтінді талдау",f1Copy:"Қауіпке тән сөздер мен қысым жасайтын тіркестерді іздейді.",f2Title:"Нәтижені түсіндіру",f2Copy:"Нәтижеге әсер еткен белгілерді көрсетіп, неліктен сақ болу керегін түсіндіреді.",f3Title:"Екі тілге бейімделген",f3Copy:"Қазақ және орыс тілдеріндегі кең таралған мысалдармен жұмыс істейді.",
+  scanKicker:"QORGAU AI · SCANNER",scanTitle:"Хабарламаны тексеру",scanSub:"Күмәнді SMS немесе мәтінді төмендегі өріске енгізіңіз.",ruleTag:"Ережелерге негізделген демо",inputLabel:"Хабарлама мәтіні",placeholder:"Мысалы: Сіздің картаңыз бұғатталды. Қолжетімділікті қалпына келтіру үшін SMS кодын жіберіңіз...",privacyHint:"Құпиясөз, SMS-код немесе банк картаңыздың деректерін енгізбеңіз.",analyzeBtn:"Хабарламаны тексеру",exampleScam:"Мысал: күмәнді хабарлама",exampleSafe:"Мысал: бейтарап хабарлама",exampleSpam:"Мысал: спам",reasonTitle:"Назар аударылған белгілер",resultDisclaimer:"Бұл — алдын ала автоматты бағалау. Нәтиже хабарламаның шын немесе жалған екенін дәлелдемейді.",
+  historyTitle:"Соңғы тексерулер",historyEmpty:"Әзірге тексерулер жоқ. Алғашқы хабарламаны тексеріп көріңіз.",tipsTitle:"Өзіңізді қалай қорғауға болады?",tip1:"SMS арқылы келген бір реттік кодты ешкімге айтпаңыз.",tip2:"Күмәнді сілтемелерді ашпай, ұйымның ресми қосымшасын өзіңіз ашыңыз.",tip3:"Асықтыратын немесе қорқытатын хабарламаны қайта тексеріңіз.",
+  noticeTitle:"Маңызды ескерту.",noticeCopy:"Qorgau AI — оқу мақсатындағы демонстрациялық прототип. Қазіргі веб-нұсқа қарапайым ережелер мен кілт сөздерге сүйенеді; ол оқытылған Naive Bayes немесе Logistic Regression моделіне қосылмаған және алаяқтықты дәл анықтауға кепілдік бермейді. Күмәнді жағдайда хабарламаны ресми арна арқылы тексеріңіз.",footerSub:"Цифрлық қауіпсіздікке арналған оқу жобасы",footerNote:"Демонстрациялық нұсқа · KZ / RU · 2026",
+  empty:"Алдымен хабарлама мәтінін енгізіңіз.",toastCopy:"Нәтиже көшірілді.",highTitle:"Күмәнді белгілер табылды",highDesc:"Бұл мәтінде алаяқтыққа немесе фишингке тән бірнеше белгі бар.",mediumTitle:"Спам болуы мүмкін",mediumDesc:"Мәтінде қажетсіз жарнамаға немесе күмәнді ұсынысқа ұқсас белгілер бар.",lowTitle:"Айқын белгі табылмады",lowDesc:"Белгілі күмәнді тіркестер анықталмады. Бұл хабарламаның қауіпсіз екенін білдірмейді.",unknownTitle:"Қосымша тексеру қажет",unknownDesc:"Мәтінде жеткілікті анық белгі табылмады. Сақтықты сақтаңыз.",reasonUrgency:"Асықтыру немесе қорқыту мәніндегі тіркес",reasonCode:"SMS немесе растау кодын сұрау",reasonMoney:"Ақша аударуға немесе төлем жасауға шақыру",reasonAccount:"Картаға немесе аккаунтқа қатысты қауіп туралы ескерту",reasonPrize:"Сыйлық, ұтыс немесе тегін ұсыныс",reasonLink:"Күмәнді сілтеме немесе URL",reasonNone:"Белгілі қауіп сөздері табылмады",labelHigh:"Жоғары күмән",labelMedium:"Орташа күмән",labelLow:"Белгі табылмады",labelUnknown:"Белгісіз",historyHigh:"Күмәнді",historyMedium:"Спам болуы мүмкін",historyLow:"Белгі жоқ",historyUnknown:"Белгісіз"
+ },
+ ru:{
+  navHome:"Главная",navCheck:"Проверка",navHow:"Как это работает",navTips:"Советы по безопасности",demoStatus:"Демо-версия",
+  eyebrow:"ИНСТРУМЕНТ ПРОВЕРКИ СООБЩЕНИЙ",heroTitle:'Не доверяйте<br><span class="gradient">подозрительным сообщениям.</span>',heroCopy:"Вставьте текст SMS или сообщения. Qorgau AI отметит подозрительные фразы и объяснит, на что стоит обратить внимание.",startBtn:"Начать проверку",learnBtn:"О проекте",
+  sideTitle:"Осторожность в цифровом мире",sideCopy:"Учебный прототип, который предварительно анализирует содержание сообщений и помогает заметить возможные признаки угрозы.",sessionChecks:"Проверок за сессию",languages:"Языка",access:"Доступность",
+  howKicker:"ВОЗМОЖНОСТИ",howTitle:"Просто. Понятно. Полезно.",howSub:"Чем помогает Qorgau AI?",f1Title:"Анализ текста",f1Copy:"Ищет слова и фразы, характерные для угроз и давления на пользователя.",f2Title:"Объяснение результата",f2Copy:"Показывает признаки, повлиявшие на результат, и объясняет, почему стоит быть осторожнее.",f3Title:"Два языка",f3Copy:"Работает с распространёнными примерами на казахском и русском языках.",
+  scanKicker:"QORGAU AI · SCANNER",scanTitle:"Проверка сообщения",scanSub:"Вставьте подозрительное SMS или текст в поле ниже.",ruleTag:"Демо на основе правил",inputLabel:"Текст сообщения",placeholder:"Например: Ваша карта заблокирована. Отправьте SMS-код, чтобы восстановить доступ...",privacyHint:"Не вводите пароли, SMS-коды или данные банковской карты.",analyzeBtn:"Проверить сообщение",exampleScam:"Пример: подозрительное сообщение",exampleSafe:"Пример: нейтральное сообщение",exampleSpam:"Пример: спам",reasonTitle:"Обнаруженные признаки",resultDisclaimer:"Это предварительная автоматическая оценка. Результат не доказывает, что сообщение настоящее или мошенническое.",
+  historyTitle:"Последние проверки",historyEmpty:"Проверок пока нет. Попробуйте проверить первое сообщение.",tipsTitle:"Как защитить себя?",tip1:"Никому не сообщайте одноразовые коды из SMS.",tip2:"Не открывайте подозрительные ссылки — самостоятельно зайдите в официальное приложение организации.",tip3:"Перепроверяйте сообщения, которые торопят или запугивают.",
+  noticeTitle:"Важно.",noticeCopy:"Qorgau AI — демонстрационный прототип для учебных целей. Текущая веб-версия использует простые правила и ключевые слова; она не подключена к обученной модели Naive Bayes или Logistic Regression и не гарантирует точное выявление мошенничества. При сомнениях проверяйте информацию через официальный канал.",footerSub:"Учебный проект о цифровой безопасности",footerNote:"Демонстрационная версия · KZ / RU · 2026",
+  empty:"Сначала введите текст сообщения.",toastCopy:"Результат скопирован.",highTitle:"Обнаружены подозрительные признаки",highDesc:"В тексте есть несколько признаков, характерных для мошенничества или фишинга.",mediumTitle:"Возможно, это спам",mediumDesc:"В тексте есть признаки нежелательной рекламы или сомнительного предложения.",lowTitle:"Явных признаков не найдено",lowDesc:"Известные подозрительные фразы не обнаружены. Это не означает, что сообщение безопасно.",unknownTitle:"Нужна дополнительная проверка",unknownDesc:"Не удалось найти достаточно явных признаков. Соблюдайте осторожность.",reasonUrgency:"Фраза с призывом поторопиться или запугиванием",reasonCode:"Запрос SMS-кода или кода подтверждения",reasonMoney:"Просьба перевести деньги или совершить платёж",reasonAccount:"Предупреждение о проблеме с картой или аккаунтом",reasonPrize:"Обещание подарка, выигрыша или бесплатного предложения",reasonLink:"Подозрительная ссылка или URL",reasonNone:"Известные опасные ключевые слова не найдены",labelHigh:"Высокое подозрение",labelMedium:"Среднее подозрение",labelLow:"Признаки не найдены",labelUnknown:"Неизвестно",historyHigh:"Подозрительно",historyMedium:"Возможен спам",historyLow:"Нет признаков",historyUnknown:"Неизвестно"
+ }
+};
 
-    </main>
+let lang = "kk";
+let checks = 0;
+let historyItems = [];
+const $ = id => document.getElementById(id);
+const getText = key => translations[lang][key] || translations.kk[key] || key;
 
-    <!-- Footer -->
-    <footer class="glass-panel border-t border-blue-900/30 py-6 text-center text-xs text-gray-400 mt-12">
-        <p>&copy; 2026 Final_AI Lab | Сұлтанбек Айзере. Барлық құқықтар қорғалған.</p>
-    </footer>
+function setLanguage(next){
+  lang = next;
+  document.documentElement.lang = lang;
+  document.querySelectorAll("[data-i18n]").forEach(el => { const key=el.dataset.i18n; if(translations[lang][key]) el.textContent=translations[lang][key]; });
+  document.querySelectorAll("[data-i18n-html]").forEach(el => { const key=el.dataset.i18nHtml; if(translations[lang][key]) el.innerHTML=translations[lang][key]; });
+  document.querySelectorAll("[data-i18n-placeholder]").forEach(el => { const key=el.dataset.i18nPlaceholder; if(translations[lang][key]) el.placeholder=translations[lang][key]; });
+  $("langBtn").textContent = lang === "kk" ? "RU" : "ҚАЗ";
+  renderHistory();
+}
+$("langBtn").addEventListener("click",()=>setLanguage(lang==="kk"?"ru":"kk"));
 
-    <!-- Interactive Script for Phishing Analyzer Simulation -->
-    <script>
-        function analyzeTarget() {
-            const inputVal = document.getElementById('targetInput').value.trim();
-            const resultBox = document.getElementById('resultBox');
-            const resultIcon = document.getElementById('resultIcon');
-            const resultTitle = document.getElementById('resultTitle');
-            const resultDesc = document.getElementById('resultDesc');
-            const riskLevel = document.getElementById('riskLevel');
-            const probScore = document.getElementById('probScore');
+const examples = {
+ scam:"Сіздің картаңыз бұғатталды! Аккаунтты ашу үшін SMS арқылы келген кодты жіберіңіз.",
+ safe:"Сәлем! Ертеңгі кездесудің уақыты 15:00-ге ауыстырылды. Кездескенше!",
+ spam:"Құттықтаймыз! Сіз үлкен сыйлық ұтып алдыңыз. Қазір сілтемеге өтіп, сыйлықты алыңыз!"
+};
+document.querySelectorAll("[data-example]").forEach(btn=>btn.addEventListener("click",()=>{$("messageInput").value=examples[btn.dataset.example];$("messageInput").focus();}));
 
-            if(!inputVal) {
-                alert('Зерттеу үшін сілтеме немесе мәтін енгізіңіз!');
-                return;
-            }
-
-            // Simple simulation logic for phishing detection demonstration
-            resultBox.classList.remove('hidden');
-            
-            const lowerInput = inputVal.toLowerCase();
-            const isPhishing = lowerInput.includes('login') || lowerInput.includes('verify') || lowerInput.includes('update') || lowerInput.includes('secure') || lowerInput.includes('bank') || lowerInput.includes('free') || lowerInput.length < 8;
-
-            if(isPhishing) {
-                resultBox.className = "mt-6 p-6 rounded-xl border bg-red-950/30 border-red-500/40 text-red-200 transition-all duration-300";
-                resultIcon.innerHTML = '<i class="fa-solid fa-triangle-exclamation text-red-400"></i>';
-                resultTitle.innerText = "Қауіпті немесе күдікті сілтеме анықталды!";
-                resultDesc.innerText = "Бұл сілтеме немесе хабарлама фишингтік шабуылдарға немесе жеке деректерді ұрлауға тән белгілерге ие.";
-                riskLevel.innerHTML = '<span class="text-red-400">Жоғары (Dangerous)</span>';
-                probScore.innerText = "94.8%";
-            } else {
-                resultBox.className = "mt-6 p-6 rounded-xl border bg-emerald-950/30 border-emerald-500/40 text-emerald-200 transition-all duration-300";
-                resultIcon.innerHTML = '<i class="fa-solid fa-shield-check text-emerald-400"></i>';
-                resultTitle.innerText = "Сілтеме қауіпсіз болып көрінеді";
-                resultDesc.innerText = "Талдау нәтижесінде бұл мекенжайдан айтарлықтай қауіпті фишингтік белгілер табылмады.";
-                riskLevel.innerHTML = '<span class="text-emerald-400">Қауіпсіз (Safe)</span>';
-                probScore.innerText = "2.1%";
-            }
-        }
-    </script>
+function analyze(text){
+  const t=text.toLowerCase();
+  const reasons=[];
+  const patterns=[
+    {key:"reasonUrgency",words:["срочно","немедленно","сейчас же","последнее предупреждение","шұғыл","дереу","тез арада","соңғы ескерту","аккаунт заблокирован","бұғатталды"]},
+    {key:"reasonCode",words:["код из sms","код из смс","смс-код","код подтверждения","одноразовый код","sms код","растау код","бір реттік код","кодты жібер","кодты айтыңыз"]},
+    {key:"reasonMoney",words:["переведите деньги","перевод средств","оплатите комиссию","оплатить сейчас","ақша аударыңыз","төлем жасаңыз","қаражат аудару"]},
+    {key:"reasonAccount",words:["карта заблокирована","ваша карта","подтвердите карту","счёт заблокирован","картаңыз бұғатталды","картаңызды растаңыз","шотыңыз бұғатталды"]},
+    {key:"reasonPrize",words:["вы выиграли","выиграй приз","бесплатный подарок","получите подарок","скидка 90%","ұтыс ұттыңыз","сыйлық ұтып","тегін сыйлық","жүлде"]},
+  ];
+  patterns.forEach(p=>{if(p.words.some(w=>t.includes(w))) reasons.push(getText(p.key));});
+  const urls = text.match(/https?:\/\/[^\s]+|www\.[^\s]+/gi) || [];
+  const suspiciousUrl = urls.some(u=>/(login|verify|secure|update|bonus|gift|bank|pay|confirm|account)/i.test(u) || /https?:\/\/\d{1,3}(\.\d{1,3}){3}/i.test(u));
+  if(suspiciousUrl) reasons.push(getText("reasonLink"));
+  const urgency = patterns[0].words.some(w=>t.includes(w));
+  const code = patterns[1].words.some(w=>t.includes(w));
+  const money = patterns[2].words.some(w=>t.includes(w));
+  const prize = patterns[4].words.some(w=>t.includes(w));
+  const account = patterns[3].words.some(w=>t.includes(w));
+  const score = (urgency?2:0)+(code?3:0)+(money?2:0)+(prize?2:0)+(account?2:0)+(suspiciousUrl?2:0);
+  let level = score>=4 ? "high" : score>=2 ? "medium" : score===0 && text.length<12 ? "unknown" : "low";
+  return {level,reasons:reasons.length?reasons:[getText("reasonNone")]};
+}
+function showResult(text){
+  const r=analyze(text);
+  const config={
+    high:{icon:"⚠",title:"highTitle",desc:"highDesc",label:"labelHigh"},
+    medium:{icon:"◈",title:"mediumTitle",desc:"mediumDesc",label:"labelMedium"},
+    low:{icon:"✓",title:"lowTitle",desc:"lowDesc",label:"labelLow"},
+    unknown:{icon:"ⓘ",title:"unknownTitle",desc:"unknownDesc",label:"labelUnknown"}
+  }[r.level];
+  $("result").dataset.level=r.level;
+  $("result").classList.add("show");
+  $("resultIcon").textContent=config.icon;
+  $("resultTitle").textContent=getText(config.title);
+  $("resultDesc").textContent=getText(config.desc);
+  $("reasonList").innerHTML="";
+  r.reasons.forEach(reason=>{const li=document.createElement("li");li.textContent=reason;$("reasonList").appendChild(li);});
+  checks++;
+  $("sessionCount").textContent=checks;
+  historyItems.unshift({text:text.replace(/\s+/g," ").slice(0,62),level:r.level,label:getText(config.label)});
+  historyItems=historyItems.slice(0,4);
+  renderHistory();
+  $("result").scrollIntoView({behavior:"smooth",block:"nearest"});
+}
+function renderHistory(){
+  const box=$("history");
+  if(!historyItems.length){box.className="history-empty";box.textContent=getText("historyEmpty");return;}
+  box.className="history-list";box.innerHTML="";
+  historyItems.forEach(item=>{
+    const row=document.createElement("div");row.className="history-item";
+    const txt=document.createElement("span");txt.textContent=item.text;
+    const badge=document.createElement("b");badge.className="pill "+item.level;badge.textContent=item.label;
+    row.append(txt,badge);box.appendChild(row);
+  });
+}
+$("analyzeBtn").addEventListener("click",()=>{
+  const text=$("messageInput").value.trim();
+  if(!text){showToast(getText("empty"));$("messageInput").focus();return;}
+  showResult(text);
+});
+$("messageInput").addEventListener("keydown",e=>{if((e.ctrlKey||e.metaKey)&&e.key==="Enter")$("analyzeBtn").click();});
+let toastTimer;
+function showToast(message){const el=$("toast");el.textContent=message;el.classList.add("show");clearTimeout(toastTimer);toastTimer=setTimeout(()=>el.classList.remove("show"),2200);}
+const sections=[...document.querySelectorAll("main section[id]")];
+const navLinks=[...document.querySelectorAll(".navlinks a")];
+if("IntersectionObserver" in window){
+  const observer=new IntersectionObserver(entries=>entries.forEach(entry=>{if(entry.isIntersecting){navLinks.forEach(a=>a.classList.toggle("active",a.getAttribute("href")==="#"+entry.target.id));}}),{rootMargin:"-25% 0px -65% 0px"});
+  sections.forEach(s=>observer.observe(s));
+}
+</script>
 </body>
 </html>
