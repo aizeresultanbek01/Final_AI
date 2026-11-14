@@ -1,1 +1,6 @@
-fastapi\nuvicorn[standard]\nstreamlit\npandas\nscikit-learn\npydantic\n
+fastapi
+uvicorn[standard]
+streamlit
+pandas
+scikit-learn
+pydantic
