@@ -1,4 +1,7 @@
 import os
+from pathlib import Path
+
+import pandas as pd
 from functools import lru_cache
 
 from fastapi import FastAPI, HTTPException
@@ -48,7 +51,7 @@ def health():
         return {
             "status": "ok",
             "models": ["Naive Bayes", "Logistic Regression"],
-            "dataset_rows": 60,
+            "dataset_rows": int(len(pd.read_csv(Path(__file__).parent / "data" / "messages.csv"))),
             "metrics": metrics
         }
     except Exception as exc:
