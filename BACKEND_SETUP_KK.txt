@@ -1,0 +1,18 @@
+QORGAU AI — BACKEND ҚОСУ
+
+1) Осы ZIP-тегі файлдарды GitHub репозиторийіңе жүкте (index.html, api.py, models/, data/, requirements.txt, render.yaml).
+2) Render.com сайтына кіріп, GitHub аккаунтыңды қос.
+3) New + → Web Service → Final_AI репозиторийін таңда.
+4) render.yaml арқылы конфигурацияланса, Build/Start командалары автоматты толтырылады:
+   Build: pip install -r requirements.txt
+   Start: uvicorn api:app --host 0.0.0.0 --port $PORT
+5) Deploy аяқталған соң backend адресіңді ашып /api/health қос:
+   https://СЕНІҢ-АДРЕСІҢ/api/health
+   status: ok болса, екі модель дайын.
+6) index.html ішінен мына жолды тап:
+   const API_BASE_URL = "https://YOUR-BACKEND-URL.onrender.com";
+   Оның ішіндегі URL-ді Render берген нақты backend адресімен ауыстыр.
+7) Өзгертілген index.html файлын GitHub-қа қайта жүкте. GitHub Pages сол сайтты көрсетеді.
+
+Ескерту: Render-дің тарифтері мен free-instance ұйқы/қолжетімділік шарттары өзгеруі мүмкін.
+Қазір деректер жиыны синтетикалық 60 мысалдан тұрады. Бұл демонстрация үшін ғана, нақты өмірдегі алаяқтықты толық анықтайды деген кепілдік жоқ.
